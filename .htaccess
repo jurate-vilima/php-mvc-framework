@@ -1,0 +1,9 @@
+# Включить переадресацию запросов на public/index.php
+RewriteEngine On
+
+# Если запрашиваемый файл или директория не существует
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+# Перенаправить все запросы на public/index.php
+RewriteRule ^(.*)$ public/index.php?url=$1 [L,QSA]
