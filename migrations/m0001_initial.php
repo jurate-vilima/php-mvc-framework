@@ -1,5 +1,5 @@
 <?php
-// namespace app\migrations;
+namespace app\migrations;
 
 use JurateVilima\MvcCore\Application;
 
