@@ -42,4 +42,8 @@ $app->router->post('/logout', [AuthController::class, 'logout']);
 $app->router->get('/profile', [AuthController::class, 'profile'])->only(['patient', 'admin']);
 //
 
+$app->on(Application::EVENT_BEFORE_REQUEST, function() {
+    echo 'Before event';
+});
+
 $app->run();
