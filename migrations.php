@@ -6,6 +6,7 @@ use app\controllers\AuthController;
 use Dotenv\Dotenv;
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/jurate-vilima/mvc-core/helpers.php';
 
 $dotenv = Dotenv::createImmutable(__DIR__); // Specify the directory where .env is located
 $dotenv->load();
