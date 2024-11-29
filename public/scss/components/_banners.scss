@@ -1,0 +1,56 @@
+@use '../abstracts/_index' as abs;
+
+.banner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: calc(100% - abs.$statistics-heigth);
+    align-items: center;
+
+    &__img-container {
+        width: 100%;
+        bottom: 0;
+        background: linear-gradient(90deg, #092F3F, #90E9DF);
+        z-index: -1;
+    }
+
+    &__image-mask {
+        z-index: 3;
+    }
+
+    &__img {
+        width: 60%; 
+        position: relative; 
+        height: auto;
+        justify-self: center;
+    }
+}
+
+
+
+// .img {
+//     width: 100%;
+//     height: 100%; 
+//     position: relative;
+// }
+
+
+
+// svg {
+//     width: 100%;
+//     height: 100%;
+// }
+
+
+
+.filter {
+    width: 100%;
+    aspect-ratio: 1/1;
+    position: absolute;
+    bottom: 0;
+    border-radius: 50%;
+    box-shadow: inset 0px -40px 47px -18px #000000, /* Added a valid color (black) */
+    59px 31px 28px -28px #b3b3b3, /* Added valid spread radius */
+    90px 77px 45px -58px #ffffff, /* Valid shadow */
+    88px 74px 57px -34px #b3b3b3, /* Valid shadow */
+    15px 38px 20px -30px #0c0c0c; /* Valid shadow */;
+}

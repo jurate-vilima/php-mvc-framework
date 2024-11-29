@@ -1,0 +1,7 @@
+@mixin equal-grid-columns($col-count) {
+    grid-template-columns: repeat($col-count, 1fr);
+}
+
+@mixin equal-grid-rows($row-count) {
+    grid-template-rows: repeat($row-count, 1fr);
+}

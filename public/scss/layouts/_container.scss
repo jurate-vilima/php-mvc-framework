@@ -1,0 +1,6 @@
+@use "../abstracts/index" as abs;
+
+.container {
+    max-width: abs.$container-width;
+    margin: 0 auto;
+}

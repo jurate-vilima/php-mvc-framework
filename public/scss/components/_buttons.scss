@@ -1,0 +1,12 @@
+//Abstracts
+@use '../abstracts/_index' as abs;
+
+.button {
+    display: inline-block;
+    color: white;
+    background: abs.$blue-color;
+    margin: auto;
+    padding: 0.7em 1em;
+    border-radius: 0.5em;
+    width: auto;
+}

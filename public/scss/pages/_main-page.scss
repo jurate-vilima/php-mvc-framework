@@ -1,0 +1,5 @@
+@use '../abstracts/_index' as abs;
+
+.main-screen {
+    height: abs.$banner-main-screen;
+}

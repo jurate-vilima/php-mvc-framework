@@ -2,6 +2,7 @@
 use JurateVilima\MvcCore\Application;
 use app\controllers\SiteController;
 use app\controllers\AuthController;
+use app\controllers\HomeController;
 
 use Dotenv\Dotenv;
 
@@ -26,7 +27,7 @@ $config = [
 $app = new Application($config);
 
 // paths are loaded in Router::routes array
-$app->router->get('/', 'home');
+$app->router->get('/', [HomeController::class, 'index']);
 $app->router->get('/users', 'users');
 
 $app->router->get('/contacts', [SiteController::class, 'contact']);

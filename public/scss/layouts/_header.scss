@@ -1,0 +1,41 @@
+//Abstracts
+@use '../abstracts/_index' as abs;
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: abs.$header-height;
+    // background: red;
+    z-index: 100;
+    background-color: transparent;
+
+    &__container {
+        display: grid;
+        @include abs.equal-grid-columns(3); 
+        align-items: center;  
+        height: 100%;
+    }
+
+    &__buttons {
+        justify-self: end;
+    }
+
+    &__list {
+        display: grid;
+        @include abs.equal-grid-columns(4); 
+        grid-template-rows: 1fr;
+        justify-content: space-between;
+    }
+
+    &__item {
+        justify-self: center;
+    }
+
+    &__buttons {
+        display: grid;
+        @include abs.equal-grid-columns(2); 
+        grid-template-rows: 1fr;
+    }
+}
