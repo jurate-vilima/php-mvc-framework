@@ -10,3 +10,71 @@
     border-radius: 0.5em;
     width: auto;
 }
+
+// Burger menu button
+.burger-button {
+    @include abs.base-button($height: 24px);
+  
+    span {
+        @include abs.line-style();
+        $transition: transform 0.5s ease, opacity 0.5s ease, top 0.5s ease;
+        // left: 0;
+  
+        &:nth-child(1) {
+            top: 0;
+        }
+    
+        &:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    
+        &:nth-child(3) {
+            top: 100%;
+            transform: translateY(-100%);
+        }
+    }
+  
+    &--active {
+        span {
+            &:nth-child(1) {
+                top: 50%;
+                transform: translateY(-50%) rotate(45deg);
+            }
+    
+            &:nth-child(2) {
+                opacity: 0;
+            }
+    
+            &:nth-child(3) {
+                top: 50%;
+                transform: translateY(-50%) rotate(-45deg);
+            }
+        }
+    }
+}
+  
+// Close button(cross)
+.close-button {
+    @include abs.base-button();
+    transition: transform 0.5s ease; 
+  
+    span {
+        @include abs.line-style($left: 50%, $top: 50%);
+        transform-origin: center;
+        transition: transform 0.5s ease;
+    
+        &:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(45deg); 
+        }
+    
+        &:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(-45deg); 
+        }
+    }
+  
+    &.rotated {
+        transform: rotate(360deg); // Вращение крестика на 360 градусов
+    }
+}
+  

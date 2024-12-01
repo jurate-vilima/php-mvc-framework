@@ -1,5 +1,4 @@
 <?php
-
 use JurateVilima\MvcCore\Application;
 ?>
 <section class="banner container">

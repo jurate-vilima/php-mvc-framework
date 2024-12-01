@@ -1,0 +1,40 @@
+@use '../abstracts/_index' as abs;
+
+.form {
+    &__title {
+        text-align: center;
+    }
+
+    & label {
+        display: block;
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+    & form {
+        @include abs.flex-column-gap(2em);
+    }
+
+    &__question {
+        margin-top: 1em;
+        font-size: 1em;
+        text-align: center;
+      
+        &__text {
+          color: abs.$utility-color;
+        }
+      
+        &__link {
+          color: #007BFF;
+          text-decoration: underline;
+          transition: color 0.3s ease;
+      
+            &:hover {
+                color: #0056b3;
+            }
+        }
+    }
+      
+}

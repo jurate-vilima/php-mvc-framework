@@ -21,8 +21,8 @@
             </ul>
         </div>
         <div class="header__buttons">
-            <div class="header__button button">Sign in</div>
-            <div class="header__button button">Register</div>
+            <div class="header__button header__button--login button">Sign in</div>
+            <div class="header__button header__button--register button">Register</div>
         </div>
     </div>
 </header>

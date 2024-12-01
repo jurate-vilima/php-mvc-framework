@@ -1,5 +1,92 @@
 @use '../abstracts/_index' as abs;
+@import '../abstracts/_animations';
 
 .main-screen {
     height: abs.$banner-main-screen;
+}
+
+.main-form {
+    position: absolute;
+    width: 30%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 6;
+    padding: 3% 0;
+    overflow: hidden;
+
+    visibility: hidden;
+    transition: visibility 0s linear 0.5s; // Makes form invisible after an animation
+
+    & .form {
+        padding: 0 10%;
+    }
+
+    &.show {
+        animation: fadeInScale 0.5s ease forwards;
+        opacity: 1;
+        visibility: visible;
+        transition: none; // Убирает задержку на видимость при открытии
+    }
+    
+    &.hide {
+        animation: fadeOutScale 0.5s ease forwards;
+        visibility: hidden;
+        transition: visibility 0s linear 0.5s; // Задержка для скрытия после анимации
+    }
+
+    &__close {
+        position: absolute;
+        right: 4%;
+        top: 4%;
+        z-index: 1;
+    }
+
+    & .form {
+        flex: 1 0 100%;
+    }
+
+    &__container {
+        display: flex;
+        width: 100%;
+        position: relative;
+        left: 0;
+        transition: all 0.5s ease;
+
+        &.shift {
+            left: -100%;
+        }
+    }
+}
+
+.content {
+    @include abs.transition(filter);
+    
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.336);
+        z-index: 5;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+         @include abs.transition(filter);
+    }
+
+    &.blur {
+        filter: blur(10px);
+         @include abs.transition(filter);
+
+        &:before {
+            opacity: 1;
+            visibility: visible;
+            @include abs.transition(opacity);
+        }
+    }
 }

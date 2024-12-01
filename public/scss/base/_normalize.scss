@@ -28,7 +28,12 @@ html,body{
 input,button,textarea{font-family:inherit;}
 
 input::-ms-clear{display: none;}
-button{cursor: pointer;}
+
+button {
+    all: unset; 
+    display: inline-block; 
+    cursor: pointer; 
+}
 button::-moz-focus-inner {padding:0;border:0;}
 a, a:visited{text-decoration: none;}
 a:hover{text-decoration: none;}
