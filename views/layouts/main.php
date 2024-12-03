@@ -2,8 +2,6 @@
 /** @var $this \JurateVilima\MvcCore\View */
 
 use JurateVilima\MvcCore\Application;
-
-//require_once Application::$ROOT_DIR . '/helpers.php';
 ?>
 
 <!doctype html>

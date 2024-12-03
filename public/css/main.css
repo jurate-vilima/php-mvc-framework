@@ -149,6 +149,7 @@ body {
   padding: 0.7em 1em;
   border-radius: 0.5em;
   width: auto;
+  cursor: pointer;
 }
 
 .burger-button {
@@ -457,6 +458,8 @@ body {
   width: 100%;
   position: relative;
   left: 0;
+}
+.main-form__container.animate {
   transition: all 0.5s ease;
 }
 .main-form__container.shift {

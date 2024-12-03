@@ -20,12 +20,16 @@ document.addEventListener('click', (e) => {
     if (burgerButton) {
         toggleButton(burgerButton);
     }
-});
 
-// Attach the event listener to the login button
-document.querySelector('.header__button--login').addEventListener('click', () => {
-    // Open the login form
-    updateMainFormStyles('login');
+    // Check if click is on the login btn or register btn
+    const loginBtn = e.target.closest('.header__button--login');
+    const registerBtn = e.target.closest('.header__button--register');
+    if(loginBtn) {
+        updateMainFormStyles('login');
+    }
+    if(registerBtn) {
+        updateMainFormStyles('register');
+    }
 });
 
 // Close the form when the close button(cross) is clicked
