@@ -16,9 +16,10 @@ export function setupFormSwitching() {
         } else if (isRegisterLink) {
             formContainer.classList.add('animate');
             formContainer.classList.add('shift');
-            // formContainer.addEventListener('transitionend', () => {
-            //     formContainer.classList.remove('animate');
-            // });
+
+            formContainer.addEventListener('transitionend', () => {
+                formContainer.classList.remove('animate');
+            });
         }
     });
 }
