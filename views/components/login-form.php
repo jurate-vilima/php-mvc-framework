@@ -4,14 +4,11 @@ use JurateVilima\MvcCore\form\Form;
 ?>
 
 <div class="form form--login">
-    <?php if($message = Application::$app->session->getFlash('login')): ?>
-        <div class="alert alert-danger">
-            <?= $message ?>
-        </div>
-    <?php endif; ?>
-
     <?= $params['loginForm']->begin('', 'post') ?> 
         <?= $params['loginForm']->getFormName() ?>
+
+        <div class="form__message"></div>
+
         <?= $params['loginForm']->createField('email') ?>
         <?= $params['loginForm']->createField('password') ?>
 
