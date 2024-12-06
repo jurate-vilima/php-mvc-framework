@@ -12,7 +12,12 @@ export const updateMainFormStyles = (form) => {
     mainForm.classList.add('show');
     overlay.classList.add('blur');
 
-    
+    // Clear error messages
+    const errorContainers = document.querySelectorAll('.invalid-feedback');
+    errorContainers.forEach(container => {
+                                            container.textContent = '';
+                                            container.classList.remove('invalid-feedback');
+                                        });
 
     if(form == 'register') {
         formContainer.classList.add('shift');
