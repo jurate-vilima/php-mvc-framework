@@ -16,7 +16,7 @@ class AuthController extends Controller {
         parent::__construct($view, $request);
 
         $this->userModel = new User;
-        $this->form = new Form($this->userModel);
+        // $this->form = new Form($this->userModel);
     }
 
     public function login() {
@@ -36,6 +36,44 @@ class AuthController extends Controller {
             }
         }
     }
+
+    public function ajaxLogin() {
+        if ($this->request->isPost()) {
+            $data = $this->request->fetchSanitizedData();
+            $this->userModel->loadData($data);
+
+            // User data validation
+            $this->userModel->validate($this->userModel->loginRules());
+            if ($this->userModel->errors) {
+                return $this->jsonResponse([
+                    'success' => false,
+                    'errors' => $this->userModel->errors,
+                ]);
+            }
+    
+            // Try login if validation successful
+            // $this->userModel->login();
+            if ($this->userModel->login()) {
+                // echo 'log';
+                return $this->jsonResponse(['success' => true]);
+            } else {
+                return $this->jsonResponse([
+                    'success' => false,
+                    // 'errors' => ['login' => 'Неверный email или пароль.'],
+                    'errors' => $this->userModel->errors,
+                ]);
+            }
+        }
+    
+        return $this->jsonResponse(['success' => false, 'message' => 'Invalid request.']);
+    }
+    
+    private function jsonResponse($data) {
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
+    }
+    
 
     public function register() {
         if($this->request->isGet()) {
