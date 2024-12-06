@@ -1,7 +1,8 @@
 const overlay = document.querySelector('.content');
 const mainForm = document.querySelector('.main-form');
 const formContainer = document.querySelector('.main-form__container');
-let form = "";
+const loginForm = document.querySelector('.form--login form');
+const registerForm = document.querySelector('.form--register form');
 
 document.addEventListener('DOMContentLoaded', () => {
     mainForm.classList.add('hide');
@@ -34,4 +35,10 @@ export const closeMainForm = () => {
     mainForm.classList.remove('show');
     mainForm.classList.add('hide');
     overlay.classList.remove('blur');
+
+    overlay.addEventListener('transitionend', () => {
+        loginForm.reset();
+        registerForm.reset();
+    });
+    
 };

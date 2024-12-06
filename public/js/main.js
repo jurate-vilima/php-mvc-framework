@@ -52,7 +52,6 @@ document.querySelector('.form--login form').addEventListener('submit', async fun
     const formData = new FormData(form);
 
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
 
     // try {
         const response = await fetch('http://localhost/ereg/ajax-login', {
@@ -64,8 +63,6 @@ document.querySelector('.form--login form').addEventListener('submit', async fun
         });
 
         let result = await response.json();
-        // result = Object.entries(result);
-        console.log(result);
        
         // Clean previous errors
         form.querySelectorAll('.invalid-feedback').forEach(el => el.textContent = '');
@@ -79,9 +76,7 @@ document.querySelector('.form--login form').addEventListener('submit', async fun
             console.log(errors);
             
             // Show errors if exist
-            if (errors.length) {
-                console.log('ffdg');
-  
+            if (errors.length) {  
                 loginForm.querySelector('.form__message').classList.add('invalid-feedback');
                 const errorContainer = loginForm.querySelector('.invalid-feedback');
                 if (errorContainer) {
