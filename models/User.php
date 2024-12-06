@@ -12,7 +12,7 @@ class User extends Model {
     public $confirmPassword;
 
     public function tableName() {
-        return 'users';
+        return 'lietotaji';
     }
 
     public function rules() {
@@ -27,9 +27,17 @@ class User extends Model {
 
     public function loginRules() {
         return [
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'group' => [
+                ['fields' => ['email', 'password'], 'rules' => ['required']],
+            ],
+            'email' => ['email'], // Дополнительные правила для email
         ];
+        // return [
+        //     ['email', 'password'] => ['required'],
+        //     'email' => ['email'],
+        //     // 'email' => ['required', 'email'],
+        //     // 'password' => ['required'],
+        // ];
     }
 
     public function ruleLabels() {
@@ -55,18 +63,18 @@ class User extends Model {
 
     public function login() {
         $user = Application::$app->db->findOne($this->tableName(), ['email' => $this->email]);
-        // var_dump($user);
 
         if($user) {
-            $hashedPassword = $user['password'];
+            $hashedPassword = $user['parole'];
 
-            if (password_verify($this->password, $hashedPassword)) {
+            // if (password_verify($this->password, $hashedPassword)) {
+            if($this->password == $hashedPassword) {
                 session_regenerate_id(true); // Generate new session ID and delete old session
 
                 $userSessionData = [
-                    'users_id' => $user['users_id'],
-                    'firstname' => $user['firstname'],
-                    'role' => 'admin',
+                    'user_id' => $user['idlietotaji'],
+                    // 'firstname' => $user['firstname'],
+                    'role' => $user['idlomas'],
                 ];
 
                 Application::$app->session->set('user', $userSessionData);
@@ -74,12 +82,14 @@ class User extends Model {
                 return true;
                 // Proceed with login
             } else {
-                Application::$app->session->setFlash('login', 'Password or Email is invalid');
+                // Application::$app->session->setFlash('login', 'Password or Email is invalid');
+                $this->errors['login'] = "Parole vai e-pasts nav pareizs";
                 return false;
                 // Handle failed login
             }
         } else {
-            Application::$app->session->setFlash('login', 'Password or Email is invalid');
+            // Application::$app->session->setFlash('login', 'Password or Email is invalid');
+            $this->errors['login'] = "Parole vai e-pasts nav pareizs";
             return false;
             // Handle case where the user doesn't exist
         }
