@@ -5,6 +5,14 @@
         text-align: center;
     }
 
+    &__message {
+        display: none;
+
+        &.invalid-feedback {
+            display: block;
+        }
+    }
+
     & label {
         display: block;
     }

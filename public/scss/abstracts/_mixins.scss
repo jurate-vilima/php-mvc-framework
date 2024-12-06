@@ -26,8 +26,14 @@
 }
 
 // Translate value
-@mixin center-transform($translateX: -50%, $translateY: -50%) {
-    transform: translate($translateX, $translateY);
+// @mixin center-transform($translateX: -50%, $translateY: -50%) {
+//     transform: translate($translateX, $translateY);
+// }
+
+// Center item with translate
+@mixin center-horizontally($value) {
+    left: $value;
+    transform: translateX(-$value);
 }
 
 // Base button styles
