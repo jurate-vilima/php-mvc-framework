@@ -1,38 +1,80 @@
-const overlay = document.querySelector('.content');
-const mainForm = document.querySelector('.main-form');
-const formContainer = document.querySelector('.main-form__container');
+import FormSwitch from '../components/FormSwitch.js';
+import LoginForm from '../components/LoginForm.js';
+import RegisterForm from '../components/RegisterForm.js';
 
-export function updateMainFormStyles(formType) {
-    mainForm.classList.remove('hide');
-    mainForm.classList.add('show');
-    overlay.classList.add('blur');
+export default class MainFormView {
+    #overlay;
+    #mainForm;
+    #formContainer;
+    #closeBtn;
+    #formSwitch;
+    loginForm;
+    registerForm;
 
-    if (formType === 'register') {
-        formContainer.classList.add('shift');
-    } else if (formType === 'login' && formContainer.classList.contains('shift')) {
-        formContainer.classList.remove('shift');
+    constructor() {
+        this.#overlay = document.querySelector('.content');
+        this.#mainForm = document.querySelector('.main-form');
+        this.#formContainer = document.querySelector('.main-form__container');
+        this.#closeBtn = document.querySelector('.main-form .close-button');
+
+        this.#formSwitch = new FormSwitch(this.#formContainer);
+        this.loginForm = new LoginForm('.form--login form', 'http://localhost/ereg/ajax-login');
+        this.registerForm = new RegisterForm('.form--register form', 'http://localhost/ereg/ajax-register', this.#formSwitch);
+
+        this.#formSwitch.setForms(this.loginForm, this.registerForm);
+
+        if (!this.#overlay || !this.#mainForm || !this.#formContainer) {
+            throw new Error('MainFormView: Required elements not found in the DOM.');
+        }
     }
-}
 
-export function closeMainForm() {
-    const mainForm = document.querySelector('.main-form');
-    const overlay = document.querySelector('.content');
-    const loginForm = document.querySelector('.form--login form');
-    const registerForm = document.querySelector('.form--register form');
+    initialize() {
+        this.#formSwitch.setupFormSwitching();
 
-    mainForm.classList.remove('show');
-    mainForm.classList.add('hide');
-    overlay.classList.remove('blur');
+        // Open a form dependingly on its type- login/register
+        const loginBtn = document.querySelector('.header__button--login');
+        const registerBtn = document.querySelector('.header__button--register');
 
-    // Listen for the end of the transition
-    overlay.addEventListener('transitionend', () => {
-        // Reset all forms inside the main form
-        if (loginForm) loginForm.reset();
-        if (registerForm) registerForm.reset();
-
-        // Clear any error messages
-        document.querySelectorAll('.form__message').forEach((el) => {
-            el.classList.remove('invalid-feedback');
+        loginBtn.addEventListener('click', () => {
+            this.updateStyles('login');
         });
-    });
+        registerBtn.addEventListener('click', () => {
+            this.updateStyles('register');
+        });
+
+        this.#closeBtn.addEventListener('click', () => {
+            this.closeForm();
+        });
+    }
+
+    // The type of form to display ('login' or 'register').
+    updateStyles(formType) {
+        this.#mainForm.classList.remove('hide');
+        this.#mainForm.classList.add('show');
+        this.#overlay.classList.add('blur');
+    
+        if (formType === 'register') {
+            this.#formContainer.classList.add('shift');
+        } else if (formType === 'login' && this.#formContainer.classList.contains('shift')) {
+            this.#formContainer.classList.remove('shift');
+        }
+    }
+
+    closeForm() {    
+        this.#mainForm.classList.remove('show');
+        this.#mainForm.classList.add('hide');
+        this.#overlay.classList.remove('blur');
+    
+        // Listen for the end of the transition
+        this.#overlay.addEventListener('transitionend', () => {
+            // Reset all forms inside the main form
+            if (this.loginForm) this.loginForm.clearFields();
+            if (this.registerForm) this.registerForm.clearFields();
+    
+            // Clear any error messages
+            document.querySelectorAll('.form__message').forEach((el) => {
+                el.classList.remove('invalid-feedback');
+            });
+        });
+    }
 }
