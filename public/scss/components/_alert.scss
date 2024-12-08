@@ -1,0 +1,31 @@
+@use '../abstracts/_index' as abs;
+
+.alert {
+    position: absolute;
+    text-align: center;
+    line-height: 3em;
+    border-radius: 1em;
+    opacity: 0; 
+    visibility: hidden; 
+    @include abs.transition(all);
+
+    &--success {
+        background: #83b383;
+        border: 2px solid #4b774b;
+    }
+
+    &--error {
+        background: #e57373;
+        border: 2px solid #c62828;
+    }
+
+    &.show {
+        opacity: 1; 
+        visibility: visible; 
+    }
+
+    &.hide {
+        opacity: 0; 
+        visibility: hidden; 
+    }
+}

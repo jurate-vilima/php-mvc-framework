@@ -93,3 +93,9 @@
         }
     }
 }
+
+.alert {
+    width: 80%;
+    @include abs.center-horizontally(50%);
+    top: 5%;
+}

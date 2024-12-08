@@ -4,14 +4,11 @@ use JurateVilima\MvcCore\form\Form;
 ?>
 
 <div class="form form--register">
-    <?php if($message = Application::$app->session->getFlash('register')): ?>
-        <div class="alert alert-danger">
-            <?= $message ?>
-        </div>
-    <?php endif; ?>
-
     <?= $params['registerForm']->begin('', 'post') ?> 
         <?= $params['registerForm']->getFormName() ?>
+
+        <div class="form__message"></div>
+        
         <?= $params['registerForm']->createField('email') ?>
         <?= $params['registerForm']->createField('password') ?>
         <?= $params['registerForm']->createField('confirmPassword') ?>

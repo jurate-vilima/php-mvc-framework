@@ -1,9 +1,8 @@
 export function rotateCross(element) {
-    element.classList.add('rotated');
-  
-    // Убираем класс после завершения вращения
-    setTimeout(() => {
+  element.classList.add('rotated');
+
+  // Remove the rotation class after animation completes
+  setTimeout(() => {
       element.classList.remove('rotated');
-    }, 500); // Время должно совпадать с длительностью анимации (0.5s)
+  }, 500); // Ensure duration matches CSS animation
 }
-  

@@ -37,11 +37,43 @@ class AuthController extends Controller {
         }
     }
 
+    // public function ajaxLogin() {
+    //     if ($this->request->isPost()) {
+    //         $data = $this->request->fetchSanitizedData();
+    //         $this->userModel->loadData($data);
+
+    //         // User data validation
+    //         $this->userModel->validate($this->userModel->loginRules());
+    //         if ($this->userModel->errors) {
+    //             return $this->jsonResponse([
+    //                 'success' => false,
+    //                 'errors' => $this->userModel->errors,
+    //             ]);
+    //         }
+    
+    //         // Try login if validation successful
+    //         // $this->userModel->login();
+    //         if ($this->userModel->login()) {
+    //             // echo 'log';
+    //             return $this->jsonResponse(['success' => true]);
+    //         } else {
+    //             return $this->jsonResponse([
+    //                 'success' => false,
+    //                 // 'errors' => ['login' => 'Неверный email или пароль.'],
+    //                 'errors' => $this->userModel->errors,
+    //             ]);
+    //         }
+    //     }
+    
+    //     return $this->jsonResponse(['success' => false, 'message' => 'Invalid request.']);
+    // }    
+
+    
     public function ajaxLogin() {
         if ($this->request->isPost()) {
             $data = $this->request->fetchSanitizedData();
             $this->userModel->loadData($data);
-
+    
             // User data validation
             $this->userModel->validate($this->userModel->loginRules());
             if ($this->userModel->errors) {
@@ -52,14 +84,11 @@ class AuthController extends Controller {
             }
     
             // Try login if validation successful
-            // $this->userModel->login();
             if ($this->userModel->login()) {
-                // echo 'log';
                 return $this->jsonResponse(['success' => true]);
             } else {
                 return $this->jsonResponse([
                     'success' => false,
-                    // 'errors' => ['login' => 'Неверный email или пароль.'],
                     'errors' => $this->userModel->errors,
                 ]);
             }
@@ -68,13 +97,6 @@ class AuthController extends Controller {
         return $this->jsonResponse(['success' => false, 'message' => 'Invalid request.']);
     }
     
-    private function jsonResponse($data) {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
-    }
-    
-
     public function register() {
         if($this->request->isGet()) {
             $this->render('register' , ['form' => $this->form]);
@@ -97,6 +119,40 @@ class AuthController extends Controller {
         }
     }
 
+    public function ajaxRegister() {
+        if ($this->request->isPost()) {
+            $data = $this->request->fetchSanitizedData();
+            $this->userModel->loadData($data);
+
+            // User data validation
+            $registerRules['group'] = ['fields' => ['email', 'password', 'confirmPassword'], 'rules' => ['required']] ;
+            // $registerRules['group'] = ['fields' => ['email', 'password', 'confirmPassword'], 'rules' => ['required']] ;
+            $modelRules = $this->userModel->getRulesByKeys(['email', 'password', 'confirmPassword']);
+            $registerRules = [...$registerRules, ...$modelRules];
+            // $registerRules = $this->userModel->getRulesByKeys(['email', 'password', 'confirmPassword']);
+
+            $this->userModel->validate($registerRules);
+            if ($this->userModel->errors) {
+                return $this->jsonResponse([
+                    'success' => false,
+                    'errors' => $this->userModel->errors,
+                ]);
+            } else {
+                $this->userModel->save('patients', ['email', 'password']);
+                // $this->userModel->save();
+                return $this->jsonResponse([
+                    'success' => true,
+                    'message' => "Jūs esat veiksmīgi piereģistrēts. Varat ieet savā kontā.",
+                ]);
+            }
+        }
+    
+        return $this->jsonResponse(['success' => false, 'message' => 'Invalid request.']);
+    }
+
+    
+   
+    
     public function logout() {
         // var_dump($this->request->getMethod());
         $this->userModel->logout();

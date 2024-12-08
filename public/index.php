@@ -41,6 +41,10 @@ $app->router->post('/register', [AuthController::class, 'register']);
 $app->router->post('/logout', [AuthController::class, 'logout']);
 
 $app->router->get('/profile', [AuthController::class, 'profile'])->only(['patient', 'admin']);
+
+$app->router->post('/ajax-login', [AuthController::class, 'ajaxLogin']);
+$app->router->post('/ajax-register', [AuthController::class, 'ajaxRegister']);
+
 //
 
 $app->on(Application::EVENT_BEFORE_REQUEST, function() {

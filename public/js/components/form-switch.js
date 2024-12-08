@@ -1,25 +1,23 @@
 const formContainer = document.querySelector('.main-form__container');
 
 export function setupFormSwitching() {
-    formContainer.addEventListener('click', (e) => {
-        const isLoginLink = e.target.closest('.form--register .form__link');
-        const isRegisterLink = e.target.closest('.form--login .form__link');
+    formContainer.addEventListener('click', (event) => {
+        const isLoginLink = event.target.closest('.form--register .form__link');
+        const isRegisterLink = event.target.closest('.form--login .form__link');
 
         if (isLoginLink) {
-            formContainer.classList.add('animate');
-            formContainer.classList.remove('shift');
-
-            formContainer.addEventListener('transitionend', () => {
-                formContainer.classList.remove('animate');
-            });
-            
+            toggleForm('login');
         } else if (isRegisterLink) {
-            formContainer.classList.add('animate');
-            formContainer.classList.add('shift');
-
-            formContainer.addEventListener('transitionend', () => {
-                formContainer.classList.remove('animate');
-            });
+            toggleForm('register');
         }
     });
+}
+
+export function toggleForm(formType) {
+    formContainer.classList.add('animate');
+    formContainer.classList.toggle('shift', formType === 'register');
+
+    formContainer.addEventListener('transitionend', () => {
+        formContainer.classList.remove('animate');
+    }, { once: true });
 }

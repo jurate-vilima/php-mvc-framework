@@ -92,6 +92,50 @@ body {
   display: none;
 }
 
+@font-face {
+  font-family: "Outfit";
+  src: url("../fonts/Outfit-Medium.woff") format("woff"), url("../fonts/Outfit-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Outfit";
+  src: url("../fonts/Outfit-Regular.woff") format("woff"), url("../fonts/Outfit-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Outfit";
+  src: url("../fonts/Outfit-Bold.woff") format("woff"), url("../fonts/Outfit-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+.alert {
+  position: absolute;
+  text-align: center;
+  line-height: 3em;
+  border-radius: 1em;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+.alert--success {
+  background: #83b383;
+  border: 2px solid #4b774b;
+}
+.alert--error {
+  background: #e57373;
+  border: 2px solid #c62828;
+}
+.alert.show {
+  opacity: 1;
+  visibility: visible;
+}
+.alert.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .sphere {
   position: absolute;
   border-radius: 50%;
@@ -123,24 +167,6 @@ body {
   box-shadow: inset 0px 0px 2px 2px #E4E9EF, inset 6px 4px 10px 5px #0f303d, inset -12px 20px 47px -18px #000000, 59px 31px 28px -28px #b3b3b3, 90px 77px 45px -58px #ffffff, 88px 74px 57px -34px #b3b3b3, 15px 38px 20px -30px #0c0c0c;
 }
 
-@font-face {
-  font-family: "Outfit";
-  src: url("../fonts/Outfit-Medium.woff") format("woff"), url("../fonts/Outfit-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Outfit";
-  src: url("../fonts/Outfit-Regular.woff") format("woff"), url("../fonts/Outfit-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Outfit";
-  src: url("../fonts/Outfit-Bold.woff") format("woff"), url("../fonts/Outfit-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
 .button {
   display: inline-block;
   color: white;
@@ -502,4 +528,11 @@ body {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.5s ease;
+}
+
+.alert {
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 5%;
 }/*# sourceMappingURL=main.css.map */
